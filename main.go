@@ -167,8 +167,8 @@ func (s Swimming) Calories() float64 {
 // Это переопределенный метод TrainingInfo() из Training.
 func (s Swimming) TrainingInfo() InfoMessage {
 	info := s.Training.TrainingInfo()
-	// добавьте полученные калории в структуру с информацией о тренировке
 	info.Speed = s.meanSpeed()
+
 	return info
 }
 
