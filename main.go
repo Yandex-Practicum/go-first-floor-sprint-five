@@ -47,17 +47,23 @@ func (t Training) Calories() float64 {
 // InfoMessage содержит информацию о проведенной тренировке.
 type InfoMessage struct {
 	// добавьте необходимые поля в структуру
-	...     // тип тренировки
-	... 	// длительность тренировки
-	...     // расстояние, которое преодолел пользователь
-	...     // средняя скорость, с которой двигался пользователь
-	...     // количество потраченных килокалорий на тренировке
+	TrainingType string     // тип тренировки
+	Duration time.Duration 	// длительность тренировки
+	Distance float64    // расстояние, которое преодолел пользователь
+	Speed float64    // средняя скорость, с которой двигался пользователь
+	Calories float64     // количество потраченных килокалорий на тренировке
 }
 
 // TrainingInfo возвращает труктуру InfoMessage, в которой хранится вся информация о проведенной тренировке.
 func (t Training) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	...
+	return InfoMessage{
+		TrainingType: t.TrainingType,
+		Duration: t.Duration,
+		Distance: t.distance(),
+		Speed: t.meanSpeed(),
+		Calories: t.Calories(),
+	}
 }
 
 // String возвращает строку с информацией о проведенной тренировке.
