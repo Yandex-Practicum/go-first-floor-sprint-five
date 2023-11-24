@@ -34,6 +34,9 @@ func (t Training) distance() float64 {
 // meanSpeed возвращает среднюю скорость бега или ходьбы.
 func (t Training) meanSpeed() float64 {
 	// вставьте ваш код ниже
+	if t.Duration.Hours() == 0 {
+		return 0
+	}
 	return t.distance() / float64(t.Duration.Hours())
 }
 
@@ -110,7 +113,6 @@ func (r Running) Calories() float64 {
 func (r Running) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
 	infoMessage := r.Training.TrainingInfo()
-	infoMessage.Calories = r.Calories()
 	return infoMessage
 }
 
@@ -135,9 +137,11 @@ type Walking struct {
 // Это переопределенный метод Calories() из Training.
 func (w Walking) Calories() float64 {
 	// вставьте ваш код ниже
-	height := w.Height / CmInM             //рост в метрах
-	meanSpeed := w.meanSpeed() * KmHInMsec //скорость в метрах в секунду
-	//((CaloriesWeightMultiplier * вес_спортсмена_в_кг + (средняя_скорость_в_метрах_в_секунду**2 / рост_в_метрах) * CaloriesSpeedHeightMultiplier * вес_спортсмена_в_кг) * время_тренировки_в_часах * MinsInHour)
+	if w.Height == 0 {
+		return 0
+	}
+	height := w.Height / CmInM
+	meanSpeed := w.meanSpeed() * KmHInMsec
 	return (CaloriesWeightMultiplier + ((math.Pow(meanSpeed, 2) / height) * CaloriesSpeedHeightMultiplier)) * w.Duration.Hours() * MinInHours * w.Weight
 }
 
@@ -146,7 +150,6 @@ func (w Walking) Calories() float64 {
 func (w Walking) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
 	infoMessage := w.Training.TrainingInfo()
-	infoMessage.Calories = w.Calories()
 	return infoMessage
 }
 
@@ -183,6 +186,9 @@ func (s Swimming) distance() float64 {
 // Это переопределенный метод Calories() из Training.
 func (s Swimming) meanSpeed() float64 {
 	// вставьте ваш код ниже
+	if s.Duration.Hours() == 0 {
+		return 0
+	}
 	return float64(s.LengthPool*s.CountPool) / MInKm / s.Duration.Hours()
 }
 
@@ -202,7 +208,6 @@ func (s Swimming) TrainingInfo() InfoMessage {
 	infoMessage := s.Training.TrainingInfo()
 	infoMessage.Distance = s.distance()
 	infoMessage.Speed = s.meanSpeed()
-	infoMessage.Calories = s.Calories()
 	return infoMessage
 }
 
