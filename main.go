@@ -126,7 +126,9 @@ type Walking struct {
 // * 0.029 * вес_спортсмена_в_кг) * время_тренировки_в_часах * мин_в_ч)
 // Это переопределенный метод Calories() из Training.
 func (w Walking) Calories() float64 {
-	return (CaloriesWeightMultiplier*w.Weight + (math.Pow(w.meanSpeed(), 2)/w.Height)*
+	speedInMSec := w.meanSpeed() * KmHInMsec // переводим скорость из км\ч в м\сек
+	heightInM := w.Height / 100              // переводим рост из сантиметров в метры
+	return (CaloriesWeightMultiplier*w.Weight + (math.Pow(speedInMSec, 2)/heightInM)*
 		CaloriesSpeedHeightMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
 }
 
@@ -159,6 +161,9 @@ func (s Swimming) distance() float64 {
 // длина_бассейна * количество_пересечений / м_в_км / продолжительность_тренировки
 // Это переопределенный метод Calories() из Training.
 func (s Swimming) meanSpeed() float64 {
+	if s.Duration == 0 {
+		return 0.0
+	}
 	return s.distance() / s.Duration.Hours()
 }
 
@@ -167,9 +172,6 @@ func (s Swimming) meanSpeed() float64 {
 // длина_бассейна_в_метрах * количество_пересечений / м_в_км / время_тренеровки_в_часах
 // Это переопределенный метод Calories() из Training.
 func (s Swimming) Calories() float64 {
-	if s.Duration == 0 {
-		return 0
-	}
 	return (s.meanSpeed() + SwimmingCaloriesMeanSpeedShift) * SwimmingCaloriesWeightMultiplier * s.Weight * s.Duration.Hours()
 }
 
