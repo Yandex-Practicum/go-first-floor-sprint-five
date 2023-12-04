@@ -34,7 +34,11 @@ func (t Training) distance() float64 {
 // meanSpeed возвращает среднюю скорость бега или ходьбы.
 func (t Training) meanSpeed() float64 {
 	// вставьте ваш код ниже
-	return t.distance() / t.Duration.Hours()
+	if t.Duration == 0 {
+		return 0
+	}
+	distances := t.distance()
+	return distances / t.Duration.Hours()
 }
 
 // Calories возвращает количество потраченных килокалорий на тренировке.
