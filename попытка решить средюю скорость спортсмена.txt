@@ -1,0 +1,25 @@
+func (w Walking) Calories() float64 {
+	//1
+	//meanSpeed := w.meanSpeed() * KmHInMsec
+	//return (CaloriesWeightMultiplier*w.Weight + (math.Pow(meanSpeed, 2)/(w.Height/CmInM))*CaloriesSpeedHeightMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
+
+	//2
+	//return (CaloriesMeanSpeedMultiplier*w.Weight + speedHeight*CaloriesMeanSpeedMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
+
+	//3
+	//heughtInMetrs := w.Height / CmInM // перевожу высоту спортсмена в метры 4
+	//speedHeight := math.Pow(w.meanSpeed()*KmHInMsec, 2) / heughtInMetrs последний
+	//speedHeight := (math.Pow(w.meanSpeed()*KmHInMsec, 2) / (heughtInMetrs))4
+	//return (CaloriesMeanSpeedMultiplier*w.Weight + speedHeight*CaloriesMeanSpeedMultiplier*w.Weight) * w.Duration.Hours() * MinInHours4
+
+	//height := w.Height / CmInM
+	//meanSpeed := w.meanSpeed() * KmHInMsec
+	//return (CaloriesWeightMultiplier + ((math.Pow(meanSpeed, 2) / height) * CaloriesSpeedHeightMultiplier)) * w.Duration.Hours() * MinInHours * w.Weight
+
+	//5
+	heughtInMetrs := w.Height / CmInM // перевожу высоту спортсмена в метры
+	speedHeight := w.meanSpeed() * KmHInMsec
+
+	//return (CaloriesWeightMultiplier*w.Weight + (math.Pow(w.meanSpeed()*KmHInMsec, 2)/(w.Height/CmInM))*CaloriesSpeedHeightMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
+	return (CaloriesWeightMultiplier*w.Weight + ((math.Pow(speedHeight, 2) / heughtInMetrs) * CaloriesSpeedHeightMultiplier * w.Weight)) * w.Duration.Hours() * MinInHours
+}
