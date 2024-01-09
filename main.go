@@ -41,6 +41,7 @@ func (t Training) meanSpeed() float64 {
 // Пока возвращаем 0, так как этот метод будет переопределяться для каждого типа тренировки.
 func (t Training) Calories() float64 {
 	return 0
+	
 }
 
 // InfoMessage содержит информацию о проведенной тренировке.
