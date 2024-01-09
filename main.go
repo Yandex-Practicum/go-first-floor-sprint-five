@@ -38,7 +38,6 @@ func (t Training) meanSpeed() float64 {
 	} 
 	meanSpeed := t.distance() / t.Duration.Hours()
 		return meanSpeed
-	
 }
 
 // Calories возвращает количество потраченных килокалорий на тренировке.
