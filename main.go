@@ -79,6 +79,7 @@ func (i InfoMessage) String() string {
 
 // CaloriesCalculator интерфейс для структур: Running, Walking и Swimming.
 type CaloriesCalculator interface {
+	meanSpeed() float64
 	Calories() float64
 	TrainingInfo() InfoMessage
 }
@@ -181,6 +182,7 @@ func ReadData(training CaloriesCalculator) string {
 	calories := training.Calories()
 	info := training.TrainingInfo()
 	info.Calories = calories
+	info.Speed = training.meanSpeed()
 	return fmt.Sprint(info)
 }
 
