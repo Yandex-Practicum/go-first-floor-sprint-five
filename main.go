@@ -36,6 +36,9 @@ func (t Training) distance() float64 {
 func (t Training) meanSpeed() float64 {
 	// вставьте ваш код ниже
 	speed := t.distance() / t.Duration.Hours()
+	if t.Duration == 0 {
+		fmt.Println("0")
+	}
 	return speed
 }
 
@@ -142,7 +145,7 @@ func (w Walking) Calories() float64 {
 	speed := math.Pow(w.meanSpeed()*KmHInMsec, 2) / w.Height
 	time := w.Duration.Hours() * MinInHours
 
-	return (weight + speed*CaloriesSpeedHeightMultiplier*w.Weight) * time
+	return (weight + speed*(CaloriesSpeedHeightMultiplier/1000)*w.Weight) * time
 
 }
 
