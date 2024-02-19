@@ -35,9 +35,11 @@ func (t Training) distance() float64 {
 // meanSpeed возвращает среднюю скорость бега или ходьбы.
 func (t Training) meanSpeed() float64 {
 	// вставьте ваш код ниже
-	speed := t.distance() / t.Duration.Hours()
+	var speed float64
 	if t.Duration == 0 {
-		fmt.Println("0")
+		speed = 0
+	} else {
+		speed = t.distance() / t.Duration.Hours()
 	}
 	return speed
 }
@@ -142,10 +144,10 @@ type Walking struct {
 func (w Walking) Calories() float64 {
 	// вставьте ваш код ниже
 	weight := CaloriesWeightMultiplier * w.Weight
-	speed := math.Pow(w.meanSpeed()*KmHInMsec, 2) / w.Height
+	speed := math.Pow(w.meanSpeed()*KmHInMsec, 2) / (w.Height / 100)
 	time := w.Duration.Hours() * MinInHours
 
-	return (weight + speed*(CaloriesSpeedHeightMultiplier/1000)*w.Weight) * time
+	return (weight + speed*CaloriesSpeedHeightMultiplier*w.Weight) * time
 
 }
 
