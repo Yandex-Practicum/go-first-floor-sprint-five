@@ -179,25 +179,27 @@ func (s Swimming) meanSpeed() float64 {
 // Это переопределенный метод Calories() из Training.
 func (s Swimming) Calories() float64 {
 	// вставьте ваш код ниже
-	//	...
+	s1 := s.meanSpeed() + SwimmingCaloriesMeanSpeedShift
+	s2 := SwimmingCaloriesWeightMultiplier * s.Weight * s.Duration.Hours()
+	return s1 + s2
 }
 
 // TrainingInfo returns info about swimming training.
 // Это переопределенный метод TrainingInfo() из Training.
 func (s Swimming) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	//	...
+	return s.Training.TrainingInfo()
 }
 
 // ReadData возвращает информацию о проведенной тренировке.
 func ReadData(training CaloriesCalculator) string {
 	// получите количество затраченных калорий
-	//	calories := ...
+	calories := training.Calories()
 
 	// получите информацию о тренировке
-	//	info := ...
+	info := training.TrainingInfo()
 	// добавьте полученные калории в структуру с информацией о тренировке
-	//	...
+	info.Calories = calories
 
 	return fmt.Sprint(info)
 }
