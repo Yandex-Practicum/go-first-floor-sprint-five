@@ -214,6 +214,7 @@ func main() {
 		},
 		Height: 185,
 	}
+	
 	fmt.Println(ReadData(walking))
 
 	running := Running{
