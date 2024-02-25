@@ -121,7 +121,7 @@ const (
 // Walking структура описывающая тренировку Ходьба
 type Walking struct {
 	Training
-	Height float64 // рост пользователя
+	Height float64
 }
 
 // Calories возвращает количество потраченных килокалорий при ходьбе.
@@ -151,8 +151,8 @@ const (
 // Swimming структура, описывающая тренировку Плавание
 type Swimming struct {
 	Training
-	LengthPool int // длина бассейна
-	CountPool int // количество пересечений бассейна
+	LengthPool int 
+	CountPool int 
 }
 // meanSpeed возвращает среднюю скорость при плавании.
 // Формула расчета:
