@@ -215,7 +215,7 @@ func ReadData(training CaloriesCalculator) string {
 }
 
 func main() {
-
+	fmt.Println("1")
 	swimming := Swimming{
 		Training: Training{
 			TrainingType: "Плавание",
@@ -227,9 +227,7 @@ func main() {
 		LengthPool: 50,
 		CountPool:  5,
 	}
-
 	fmt.Println(ReadData(swimming))
-
 	walking := Walking{
 		Training: Training{
 			TrainingType: "Ходьба",
