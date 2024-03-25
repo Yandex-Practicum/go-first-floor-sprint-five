@@ -142,9 +142,10 @@ type Walking struct {
 func (w Walking) Calories() float64 {
 	// вставьте ваш код ниже
 	weight := CaloriesWeightMultiplier * w.Weight
-	speed := math.Pow(w.meanSpeed()*KmHInMsec, 2) / w.Height
+	heightCm := w.Height / CmInM
+	speed := math.Pow(w.meanSpeed()*KmHInMsec, 2) / heightCm
 	time := w.Duration.Hours() * MinInHours
-	return (weight + speed*(CaloriesSpeedHeightMultiplier/1000)*w.Weight) * time
+	return (weight + speed*(CaloriesSpeedHeightMultiplier)*(w.Weight)) * time
 }
 
 // TrainingInfo возвращает структуру InfoMessage с информацией о проведенной тренировке.
@@ -178,8 +179,8 @@ func (s Swimming) meanSpeed() float64 {
 	if s.Duration == 0 {
 		return 0
 	}
-	speed := float64(s.LengthPool) * float64(s.CountPool) / float64(MInKm) / s.Duration.Hours()
-	return speed
+	//speed := float64(s.LengthPool) * float64(s.CountPool) / float64(MInKm) / s.Duration.Hours()
+	return float64(s.LengthPool) * float64(s.CountPool) / float64(MInKm) / s.Duration.Hours()
 }
 
 // Calories возвращает количество калорий, потраченных при плавании.
