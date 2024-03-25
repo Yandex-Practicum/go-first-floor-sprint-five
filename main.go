@@ -1,5 +1,5 @@
 package main
-//test push
+//test push Не для проверки
 import (
 	"fmt"
 	"math"
