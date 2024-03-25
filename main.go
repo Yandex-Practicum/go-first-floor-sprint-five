@@ -38,7 +38,7 @@ func (t Training) meanSpeed() float64 {
 	if t.Duration == 0 {
 		return 0
 	}
-	return t.distance() / float64(t.Duration)
+	return t.distance() / t.Duration.Hours()
 
 }
 
